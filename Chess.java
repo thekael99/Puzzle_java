@@ -38,72 +38,59 @@ public class Chess {
         return (-1);
     }
 
-    private void swapUp() {
+    public void swapUp() {
+        if (boxUp(this.boxZero) == -1)
+            return;
         box[this.boxZero] = box[boxUp(this.boxZero)];
         this.boxZero = boxUp(this.boxZero);
         box[this.boxZero] = 0;
     }
     
-    private void swapDown() {
+    public void swapDown() {
+        if (boxDown(this.boxZero) == -1)
+            return;
         box[this.boxZero] = box[boxDown(this.boxZero)];
         this.boxZero = boxDown(this.boxZero);
         box[this.boxZero] = 0;
     }
     
-    private void swapLeft() {
+    public void swapLeft() {
+        if (boxLeft(this.boxZero) == -1)
+            return;
         box[this.boxZero] = box[boxLeft(this.boxZero)];
         this.boxZero = boxLeft(this.boxZero);
         box[this.boxZero] = 0;
     }
     
-    private void swapRight() {
+    public void swapRight() {
+        if (boxRight(this.boxZero) == -1)
+            return;
         box[this.boxZero] = box[boxRight(this.boxZero)];
         this.boxZero = boxRight(this.boxZero);
         box[this.boxZero] = 0;
     }
 
-    private int random() {
-        int check = -1;
+    public void mix() {
         Random rand = new Random();
         int trend = -1;
-        while(check==-1)
-        {
+        for (int i = 0; i < this.step; i++) {
             trend = rand.nextInt(4);
             switch (trend) {
             case 0:
-                check = boxUp(this.boxZero);
+                swapUp();
                 break;
             case 1:
-                check = boxRight(this.boxZero);
+                swapRight();
                 break;
             case 2:
-                check = boxDown(this.boxZero);
+                swapDown();
                 break;
             case 3:
-                check = boxLeft(this.boxZero);
+                swapLeft();
                 break;
             }
         }
-        switch (trend) {
-        case 0:
-            swapUp();
-            break;
-        case 1:
-            swapRight();
-            break;
-        case 2:
-            swapDown();
-            break;
-        case 3:
-            swapLeft();
-            break;
-        }
-        return (trend);
-    }
-
-    public void mix() {
-        for (int i = 0; i < this.step; i++)
-            this.solution[i] = random();
+        //minimizeSolution();
     }
 
     private boolean sameStep(int i) {
@@ -118,6 +105,21 @@ public class Chess {
                 this.solution[i] = -1;
                 this.solution[i + 1] = -1;
             }
-        }        
-    }        
+        }
+    }
+
+    public boolean isWin() {
+        for (int i = 0; i < 9; i++)
+            if (this.box[i] != i)
+                return (false);
+        return (true);
+    }
+
+    public int getBox(int i) {
+        return (this.box[i]);
+    }
+
+    public int[] getSolution() {
+        return (this.solution.clone());
+    }      
 }
