@@ -9,6 +9,7 @@ public class Puzzle {
     }
 
     private void show() {
+        System.out.println("");
         for (int i = 0; i < 9; i++) {
             if (this.chess.getBox(i) != 0)
                 System.out.print(this.chess.getBox(i) + " ");
@@ -54,9 +55,9 @@ public class Puzzle {
             else
                 System.out.print("_" + " ");
             if (i % 3 == 2)
-                System.out.println("You win!");
+                System.out.println("");
+            System.out.println("You win!");
         }
-
     }
 
     public static void main(String[] args) {
