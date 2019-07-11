@@ -56,8 +56,8 @@ public class Puzzle {
                 System.out.print("_" + " ");
             if (i % 3 == 2)
                 System.out.println("");
-            System.out.println("You win!");
         }
+        System.out.println("You win!");
     }
 
     public static void main(String[] args) {
